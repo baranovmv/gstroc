@@ -3,6 +3,7 @@ tests = [
 ]
 
 gstcheck_dep = dependency('gstreamer-check-1.0', required : true, method : 'pkg-config')
+gstrtp_dep = dependency('gstreamer-rtp-1.0', required : true, method : 'pkg-config')
 fsmod = import('fs')
 test_defines = [
   '-UG_DISABLE_ASSERT',
@@ -16,7 +17,7 @@ foreach t : tests
   fname = t[0]
   test_name = fname.split('.')[0].underscorify()
   exe = executable(test_name, fname,
-      dependencies : [roc_plugin_dep, gstcheck_dep], 
+      dependencies : [roc_plugin_dep, gstcheck_dep, gstrtp_dep], 
   )
   test(test_name, exe, timeout : 60)
 endforeach
